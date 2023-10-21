@@ -1,10 +1,13 @@
 import { Module } from '@nestjs/common';
-import { CreateClient } from '../../../application/use-cases/create-client';
+import { FindAddress } from '../../../application/use-cases/address/find-address';
+import { CreateClient } from '../../../application/use-cases/client/create-client';
+
 import { ClientController } from '../controllers/client.controller';
+import { CepModule } from './cep.module';
 
 @Module({
-  imports: [],
+  imports: [CepModule],
   controllers: [ClientController],
-  providers: [CreateClient],
+  providers: [CreateClient, FindAddress],
 })
 export class AppModule {}
