@@ -1,4 +1,4 @@
-export class Address {
+export interface Address {
   cep: string;
   state: string;
   city: string;

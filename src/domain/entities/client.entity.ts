@@ -1,7 +1,7 @@
 import { Address } from "./address.entity";
+import { Entity } from "./base/entity";
 
-export class Client {
-  id: string;
+export interface Client extends Entity {
   name: string;
   email: string;
   phone: string;
