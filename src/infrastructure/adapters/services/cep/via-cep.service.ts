@@ -1,5 +1,6 @@
 import { HttpService } from '@nestjs/axios';
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { CepNotFoundError } from '../../../../application/erros/custom-erros';
 import { Address } from '../../../../domain/entities/address.entity';
 import { CepService } from '../../../../interfaces/services/cep-service.interface';
 
@@ -33,7 +34,7 @@ export class ViaCepService implements CepService {
       >(url);
 
       if ('erro' in data) {
-        throw new HttpException('CEP not found', HttpStatus.NOT_FOUND);
+        throw new CepNotFoundError();
       }
 
       return {
@@ -44,7 +45,7 @@ export class ViaCepService implements CepService {
         street: data.logradouro,
       };
     } catch (error) {
-      throw new HttpException('CEP not found', HttpStatus.NOT_FOUND);
+      throw new CepNotFoundError();
     }
   }
 }

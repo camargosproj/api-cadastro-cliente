@@ -1,8 +1,9 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Address } from '../../../domain/entities/address.entity';
 import { CacheService } from '../../../infrastructure/adapters/services/cache/cache.service';
 import { CepManager } from '../../../infrastructure/adapters/services/cep/cep-manager.service';
 import { FindAddressUseCase } from '../../../interfaces/use-cases/address/find-address.interface';
+import { AddressNotFoundError } from '../../erros/custom-erros';
 
 @Injectable()
 export class FindAddress implements FindAddressUseCase {
@@ -21,7 +22,7 @@ export class FindAddress implements FindAddressUseCase {
     const address = await this.cepService.getAddressByCep(cep);
 
     if (!address) {
-      throw new HttpException('Address not found', HttpStatus.NOT_FOUND);
+      throw new AddressNotFoundError();
     }
 
     await this.cacheService.set(cep, address);
