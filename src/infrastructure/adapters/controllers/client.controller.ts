@@ -14,8 +14,6 @@ export class ClientController {
   async create(@Body() client: CreateClientDto) {
     const address = await this.findAddressUseCase.execute(client.cep);
 
-    return address;
-
     const response = await this.createClientUseCase.execute({
       name: client.name,
       email: client.email,
