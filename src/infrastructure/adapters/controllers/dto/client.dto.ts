@@ -36,4 +36,14 @@ export class FindAllQueryDto {
   @IsNotEmpty()
   @IsOptional()
   name: string;
+
+  @IsNumberString()
+  @IsNotEmpty()
+  @IsOptional()
+  limit: number;
+
+  @IsNumberString()
+  @IsNotEmpty()
+  @IsOptional()
+  offset: number;
 }

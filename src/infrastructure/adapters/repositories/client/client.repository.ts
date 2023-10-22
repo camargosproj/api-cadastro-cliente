@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Client } from '../../../../domain/entities/client.entity';
 import { ClientRepository } from '../../../../interfaces/repositories/client/client.repository.interface';
+import { ClientPaginated } from '../../../../interfaces/use-cases/client/findall-client.interface';
 import { ClientModel } from '../../../mongo/models/client.model';
 
 @Injectable()
@@ -15,13 +16,41 @@ export class ClientRepositoryImpl implements ClientRepository {
     return createdClient;
   }
 
-  async findAll(): Promise<Client[]> {
+  async findAll(
+    name: string,
+    limit: number,
+    offset: number,
+    basePath: string,
+  ): Promise<ClientPaginated> {
+    const perPage = limit || 10;
+
+    const currentPage = Math.floor(offset / perPage) + 1;
+
     const clients = await this.clientModel
-      .find()
-      .select('id name email phone address')
+      .find({ name: { $regex: new RegExp(name, 'i') } })
+      .skip(offset)
+      .limit(perPage)
+      .select('id name')
       .exec();
 
-    return clients;
+    const totalItems = await this.clientModel.countDocuments().exec();
+    const totalPages = Math.ceil(totalItems / perPage);
+
+    const previousPage = currentPage > 1 ? currentPage - 1 : null;
+    const nextPage = currentPage < totalPages ? currentPage + 1 : null;
+    return {
+      count: clients.length,
+      previous: previousPage
+        ? `${basePath}?limit=${perPage}&offset=${(previousPage - 1) * perPage}`
+        : null,
+      next: nextPage
+        ? `${basePath}?limit=${perPage}&offset=${(nextPage - 1) * perPage}`
+        : null,
+      results: clients.map((client) => ({
+        id: client._id.toString(),
+        name: client.name,
+      })),
+    };
   }
 
   async findById(id: string): Promise<Client> {
@@ -37,13 +66,5 @@ export class ClientRepositoryImpl implements ClientRepository {
 
   async delete(id: string): Promise<void> {
     await this.clientModel.deleteOne({ _id: id }).exec();
-  }
-
-  async findAllByName(name: string): Promise<Client[]> {
-    const clients = await this.clientModel
-      .find({ name: { $regex: new RegExp(name, 'i') } })
-      .exec();
-
-    return clients;
   }
 }

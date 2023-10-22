@@ -6,7 +6,9 @@ import {
   Param,
   Post,
   Query,
+  Req,
 } from '@nestjs/common';
+import { Request } from 'express';
 import { FindAddress } from '../../../application/use-cases/address/find-address';
 import { CreateClient } from '../../../application/use-cases/client/create-client';
 import { DeleteOneClient } from '../../../application/use-cases/client/deleteone-client';
@@ -39,8 +41,20 @@ export class ClientController {
   }
 
   @Get()
-  async findAll(@Query() { name }: FindAllQueryDto) {
-    const response = await this.findAllClientsUseCase.execute(name);
+  async findAll(
+    @Req() req: Request,
+    @Query() { name, limit, offset }: FindAllQueryDto,
+  ) {
+    const basePath = `${req.protocol}://${req.get('host')}${req.baseUrl}${
+      req.path
+    }`;
+
+    const response = await this.findAllClientsUseCase.execute(
+      name,
+      limit,
+      offset,
+      basePath,
+    );
     return response;
   }
 

@@ -7,13 +7,13 @@ export type ClientDocument = HydratedDocument<ClientModel>;
   timestamps: true,
   toJSON: {
     transform: function (doc, ret) {
-      delete ret.address._id;
+      delete ret?.address._id;
       return {
-        id: ret._id,
-        name: ret.name,
-        email: ret.email,
-        phone: ret.phone,
-        address: ret.address,
+        id: ret?._id,
+        name: ret?.name,
+        email: ret?.email,
+        phone: ret?.phone,
+        address: ret?.address,
       };
     },
   },
