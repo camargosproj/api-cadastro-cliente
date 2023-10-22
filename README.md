@@ -15,10 +15,6 @@ Antes de começar, certifique-se de atender aos seguintes requisitos:
 Para iniciar todos os serviços, execute o seguinte comando:
 `     docker-compose up -d`
 
-# cadastro-cliente
-
-Este é um projeto para gerenciar registros de clientes. Ele fornece uma API RESTful para criar, recuperar, atualizar e excluir informações de clientes.
-
 ## Acesso à Documentação da API
 
 Você pode acessar a documentação da API em [http://localhost:3000/docs](http://localhost:3000/docs).
