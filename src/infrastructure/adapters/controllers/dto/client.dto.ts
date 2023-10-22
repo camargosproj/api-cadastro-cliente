@@ -2,6 +2,7 @@ import {
   IsEmail,
   IsNotEmpty,
   IsNumberString,
+  IsOptional,
   IsString,
   Matches,
   Validate,
@@ -28,4 +29,11 @@ export class CreateClientDto {
     message: 'cep must be a valid Brazilian CEP',
   })
   cep: string;
+}
+
+export class FindAllQueryDto {
+  @IsString()
+  @IsNotEmpty()
+  @IsOptional()
+  name: string;
 }

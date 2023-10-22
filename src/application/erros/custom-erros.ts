@@ -18,3 +18,14 @@ export class CepNotFoundError extends CustomHttpException {
     super('Cep not found', 404);
   }
 }
+export class ClientNotFoundError extends CustomHttpException {
+  constructor() {
+    super('Client not found', 404);
+  }
+}
+
+export class ClientAlreadyExistsError extends CustomHttpException {
+  constructor() {
+    super('Client already exists', 409);
+  }
+}

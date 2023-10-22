@@ -5,6 +5,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 import * as redisStore from 'cache-manager-redis-store';
 import { FindAddress } from '../../../application/use-cases/address/find-address';
 import { CreateClient } from '../../../application/use-cases/client/create-client';
+import { DeleteOneClient } from '../../../application/use-cases/client/deleteone-client';
+import { FindAllClients } from '../../../application/use-cases/client/findall-client';
+import { FindOneClient } from '../../../application/use-cases/client/findone-client';
 import { ClientModel, ClientSchema } from '../../mongo/models/client.model';
 import { ClientController } from '../controllers/client.controller';
 import { HttpExceptionFilter } from '../exception-filters/http-exception-filter';
@@ -35,7 +38,10 @@ import { CepModule } from './cep.module';
   controllers: [ClientController],
   providers: [
     CreateClient,
+    FindAllClients,
+    FindOneClient,
     FindAddress,
+    DeleteOneClient,
     CacheService,
     {
       provide: APP_FILTER,
