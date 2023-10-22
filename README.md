@@ -1,73 +1,34 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# cadastro-cliente
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Este é um projeto para gerenciar registros de clientes. Ele fornece uma API RESTful para criar, recuperar, atualizar e excluir informações de clientes.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### Pré-requisitos
 
-## Description
+Antes de começar, certifique-se de atender aos seguintes requisitos:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Node.js e npm instalados.
+- Docker instalado (para executar MongoDB e Redis).
+- Um arquivo `.env` para armazenar as variáveis de ambiente. Você pode usar o modelo `.env` fornecido.
 
-## Installation
+### Instalando
 
-```bash
-$ npm install
-```
+Para iniciar todos os serviços, execute o seguinte comando:
+`     docker-compose up -d`
 
-## Running the app
+# cadastro-cliente
 
-```bash
-# development
-$ npm run start
+Este é um projeto para gerenciar registros de clientes. Ele fornece uma API RESTful para criar, recuperar, atualizar e excluir informações de clientes.
 
-# watch mode
-$ npm run start:dev
+## Acesso à Documentação da API
 
-# production mode
-$ npm run start:prod
-```
+Você pode acessar a documentação da API em [http://localhost:3000/docs](http://localhost:3000/docs).
 
-## Test
+## Uso
 
-```bash
-# unit tests
-$ npm run test
+- **Criar um novo cliente:** Para criar um novo cliente, use o endpoint POST `/clients`.
 
-# e2e tests
-$ npm run test:e2e
+- **Listar todos os clientes:** Para listar todos os clientes, use o endpoint GET `/clients`.
 
-# test coverage
-$ npm run test:cov
-```
+- **Encontrar um cliente por ID:** Para encontrar um cliente pelo ID, use o endpoint GET `/clients/{id}`.
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- **Excluir um cliente por ID:** Para excluir um cliente pelo ID, use o endpoint DELETE `/clients/{id}`.
