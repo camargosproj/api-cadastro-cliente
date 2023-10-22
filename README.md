@@ -1,4 +1,4 @@
-# cadastro-cliente
+# Api Cadastro de Clientes
 
 Este é um projeto para gerenciar registros de clientes. Ele fornece uma API RESTful para criar, recuperar, atualizar e excluir informações de clientes.
 
@@ -6,8 +6,7 @@ Este é um projeto para gerenciar registros de clientes. Ele fornece uma API RES
 
 Antes de começar, certifique-se de atender aos seguintes requisitos:
 
-- Node.js e npm instalados.
-- Docker instalado (para executar MongoDB e Redis).
+- Docker instalado (para executar Node, Nginx, MongoDB e Redis).
 - Um arquivo `.env` para armazenar as variáveis de ambiente. Você pode usar o modelo `.env` fornecido.
 
 ### Instalando
