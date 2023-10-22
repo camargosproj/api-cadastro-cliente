@@ -8,6 +8,7 @@ import { CreateClient } from '../../../application/use-cases/client/create-clien
 import { DeleteOneClient } from '../../../application/use-cases/client/deleteone-client';
 import { FindAllClients } from '../../../application/use-cases/client/findall-client';
 import { FindOneClient } from '../../../application/use-cases/client/findone-client';
+import { config } from '../../../config/config';
 import { ClientModel, ClientSchema } from '../../mongo/models/client.model';
 import { ClientController } from '../controllers/client.controller';
 import { HttpExceptionFilter } from '../exception-filters/http-exception-filter';
@@ -17,11 +18,11 @@ import { CepModule } from './cep.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017', {
-      dbName: 'clients',
+    MongooseModule.forRoot(config.database.uri, {
+      dbName: config.database.name,
       auth: {
-        username: 'root',
-        password: 'root',
+        username: config.database.user,
+        password: config.database.password,
       },
     }),
     MongooseModule.forFeature([
@@ -30,8 +31,8 @@ import { CepModule } from './cep.module';
     CacheModule.register({
       isGlobal: true,
       store: redisStore,
-      host: 'localhost',
-      port: 6379,
+      host: config.cache.host,
+      port: config.cache.port,
     }),
     CepModule,
   ],
