@@ -1,11 +1,19 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './infrastructure/adapters/modules/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Validate the incoming request payload against the DTO
+  app.setGlobalPrefix('api/v1');
+
+  const swagger = new DocumentBuilder()
+    .setTitle('Cadastro de Clientes')
+    .setDescription('API para cadastro de clientes')
+    .setVersion('1.0')
+    .build();
+
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
@@ -14,6 +22,10 @@ async function bootstrap() {
       forbidUnknownValues: true,
     }),
   );
+
+  const document = SwaggerModule.createDocument(app, swagger);
+
+  SwaggerModule.setup('docs', app, document);
 
   await app.listen(3000);
 }
