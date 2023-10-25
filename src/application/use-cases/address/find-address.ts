@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { Address } from '../../../domain/entities/address.entity';
-import { CacheService } from '../../../infrastructure/adapters/services/cache/cache.service';
-import { CepManager } from '../../../infrastructure/adapters/services/cep/cep-manager.service';
+import { CacheService } from '../../../interfaces/services/cache-service.interface';
+import { CepService } from '../../../interfaces/services/cep-service.interface';
 import { FindAddressUseCase } from '../../../interfaces/use-cases/address/find-address.interface';
 import { AddressNotFoundError } from '../../erros/custom-erros';
 
 @Injectable()
 export class FindAddress implements FindAddressUseCase {
   constructor(
-    private readonly cepService: CepManager,
+    private readonly cepService: CepService,
     private readonly cacheService: CacheService,
   ) {}
 

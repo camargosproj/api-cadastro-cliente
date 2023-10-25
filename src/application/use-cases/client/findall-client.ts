@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ClientRepositoryImpl } from '../../../infrastructure/adapters/repositories/client/client.repository';
+import { ClientRepository } from '../../../interfaces/repositories/client/client.repository.interface';
 import {
   ClientPaginated,
   FindAllClientsUseCase,
@@ -7,7 +7,7 @@ import {
 
 @Injectable()
 export class FindAllClients implements FindAllClientsUseCase {
-  constructor(private readonly clientRepository: ClientRepositoryImpl) {}
+  constructor(private readonly clientRepository: ClientRepository) {}
 
   async execute(
     name?: string,

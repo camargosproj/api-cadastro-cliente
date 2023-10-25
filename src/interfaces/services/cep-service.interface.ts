@@ -1,5 +1,5 @@
 import { Address } from '../../domain/entities/address.entity';
 
-export interface CepService {
-  getAddressByCep(cep: string): Promise<Address>;
+export abstract class CepService {
+  abstract getAddressByCep(cep: string): Promise<Address>;
 }

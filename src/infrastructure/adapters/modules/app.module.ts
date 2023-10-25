@@ -9,11 +9,13 @@ import { DeleteOneClient } from '../../../application/use-cases/client/deleteone
 import { FindAllClients } from '../../../application/use-cases/client/findall-client';
 import { FindOneClient } from '../../../application/use-cases/client/findone-client';
 import { config } from '../../../config/config';
+import { ClientRepository } from '../../../interfaces/repositories/client/client.repository.interface';
+import { CacheService } from '../../../interfaces/services/cache-service.interface';
 import { ClientModel, ClientSchema } from '../../mongo/models/client.model';
 import { ClientController } from '../controllers/client.controller';
 import { HttpExceptionFilter } from '../exception-filters/http-exception-filter';
 import { ClientRepositoryImpl } from '../repositories/client/client.repository';
-import { CacheService } from '../services/cache/cache.service';
+import { CacheServiceImpl } from '../services/cache/cache.service';
 import { CepModule } from './cep.module';
 
 @Module({
@@ -43,12 +45,18 @@ import { CepModule } from './cep.module';
     FindOneClient,
     FindAddress,
     DeleteOneClient,
-    CacheService,
+    {
+      provide: CacheService,
+      useClass: CacheServiceImpl,
+    },
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
     },
-    ClientRepositoryImpl,
+    {
+      provide: ClientRepository,
+      useClass: ClientRepositoryImpl,
+    },
   ],
 })
 export class AppModule {}

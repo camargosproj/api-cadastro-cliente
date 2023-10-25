@@ -1,15 +1,15 @@
 import { Client } from '../../../domain/entities/client.entity';
 import { ClientPaginated } from '../../use-cases/client/findall-client.interface';
 
-export interface ClientRepository {
-  create(client: Client): Promise<Client>;
-  findAll(
+export abstract class ClientRepository {
+  abstract create(client: Client): Promise<Client>;
+  abstract findAll(
     name?: string,
     limit?: number,
     offset?: number,
     basePath?: string,
   ): Promise<ClientPaginated>;
-  findById(id: string): Promise<Client>;
-  findByEmail(email: string): Promise<Client>;
-  delete(id: string): Promise<void>;
+  abstract findById(id: string): Promise<Client>;
+  abstract findByEmail(email: string): Promise<Client>;
+  abstract delete(id: string): Promise<void>;
 }
